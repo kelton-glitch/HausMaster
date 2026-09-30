@@ -1,0 +1,28 @@
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.jks
+*.keystore
+key.properties
+# Firebase service-account keys (firebase-admin on the backend)
+*service-account*.json
+firebase-adminsdk*.json
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# Logs / temp
+*.log
+*.tmp
+
+# Project PDFs and exam material, if copied in
+*.pdf

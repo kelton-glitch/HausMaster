@@ -1,0 +1,24 @@
+{
+  "@@locale": "fr",
+  "email": "Email",
+  "password": "Mot de passe",
+  "passwordWithHint": "Mot de passe (8 caractères min.)",
+  "fullName": "Nom complet",
+  "phoneOptional": "Téléphone (optionnel)",
+  "login": "Se connecter",
+  "createAccount": "Créer un compte",
+  "createMyAccount": "Créer mon compte",
+  "logout": "Se déconnecter",
+  "welcome": "Bienvenue, {name}",
+  "@welcome": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "fieldRequired": "Requis",
+  "invalidEmail": "Email invalide",
+  "passwordTooShort": "8 caractères minimum",
+  "errInvalidCredentials": "Email ou mot de passe incorrect.",
+  "errEmailTaken": "Cet email est déjà utilisé.",
+  "errInvalidData": "Données invalides (mot de passe : 8 caractères minimum).",
+  "errNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion.",
+  "errGeneric": "Une erreur est survenue. Réessayez."
+}

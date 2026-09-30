@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "email": "Email",
+  "password": "Password",
+  "passwordWithHint": "Password (min. 8 characters)",
+  "fullName": "Full name",
+  "phoneOptional": "Phone (optional)",
+  "login": "Sign in",
+  "createAccount": "Create an account",
+  "createMyAccount": "Create my account",
+  "logout": "Sign out",
+  "welcome": "Welcome, {name}",
+  "fieldRequired": "Required",
+  "invalidEmail": "Invalid email",
+  "passwordTooShort": "At least 8 characters",
+  "errInvalidCredentials": "Incorrect email or password.",
+  "errEmailTaken": "This email is already in use.",
+  "errInvalidData": "Invalid data (password: at least 8 characters).",
+  "errNetwork": "Cannot reach the server. Check your connection.",
+  "errGeneric": "Something went wrong. Please try again."
+}
