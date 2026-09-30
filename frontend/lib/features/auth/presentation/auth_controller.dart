@@ -56,6 +56,11 @@ class AuthController extends AsyncNotifier<Manager?> {
 
   void sessionExpired() => state = const AsyncData(null);
 
+  /// Drops a stale error so it isn't shown on another auth screen.
+  void clearError() {
+    if (state.hasError) state = const AsyncData(null);
+  }
+
   Future<void> _run(Future<Manager> Function() action) async {
     // No AsyncLoading here: it would swap the form for the splash screen.
     // Screens track their own in-flight flag.

@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 
-from app.api.v1.routers import auth, health
+from app.api.v1.routers import auth, health, properties, units
+
+# The one list of features. Adding a feature = adding its router module here.
+FEATURE_ROUTERS = [health, auth, properties, units]
 
 api_router = APIRouter(prefix="/api/v1")
-api_router.include_router(auth.router)
-api_router.include_router(health.router)
+for feature in FEATURE_ROUTERS:
+    api_router.include_router(feature.router)

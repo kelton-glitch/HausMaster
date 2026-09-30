@@ -3,6 +3,7 @@ import jwt
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.core.errors import ConflictError, InvalidToken, UnauthorizedError
 from app.core.security import (
     create_access_token,
     create_refresh_token,
@@ -13,12 +14,16 @@ from app.core.security import (
 from app.models.manager import Manager
 
 
-class EmailAlreadyRegistered(Exception):
-    pass
+class EmailAlreadyRegistered(ConflictError):
+    code = "email_taken"
+    message = "Email already registered"
 
 
-class InvalidCredentials(Exception):
-    """Raised for unknown email, wrong password and bad refresh token alike."""
+class InvalidCredentials(UnauthorizedError):
+    """Unknown email and wrong password are deliberately indistinguishable."""
+
+    code = "invalid_credentials"
+    message = "Invalid email or password"
 
 
 def register_manager(
@@ -51,8 +56,8 @@ def refresh(db: Session, *, refresh_token: str) -> dict[str, str]:
     try:
         manager_id = int(decode_token(refresh_token, "refresh"))
     except (jwt.InvalidTokenError, ValueError):
-        raise InvalidCredentials
+        raise InvalidToken
     manager = db.get(Manager, manager_id)
     if manager is None or not manager.is_active:
-        raise InvalidCredentials
+        raise InvalidToken
     return _token_pair(manager)
