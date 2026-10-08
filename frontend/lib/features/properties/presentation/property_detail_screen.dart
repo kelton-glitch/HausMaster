@@ -8,6 +8,8 @@ import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/dialogs.dart';
 import '../../../core/widgets/form_sheet.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../leases/presentation/leases_tab.dart';
+import '../../tenants/presentation/tenants_tab.dart';
 import '../../units/presentation/unit_types_tab.dart';
 import '../../units/presentation/units_tab.dart';
 import '../domain/policy.dart';
@@ -96,9 +98,11 @@ class _PropertyDetail extends ConsumerWidget {
     final active = property.isActive;
     final canUnits = active && property.can(PropertyAction.manageUnits);
     final canAccess = active && property.can(PropertyAction.manageAccess);
+    final canTenants = active && property.can(PropertyAction.manageTenants);
+    final canLeases = active && property.can(PropertyAction.manageLeases);
 
     return DefaultTabController(
-      length: 3,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: Text(property.name),
@@ -121,8 +125,12 @@ class _PropertyDetail extends ConsumerWidget {
               ),
           ],
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs: [
               Tab(text: l10n.tabUnits),
+              Tab(text: l10n.tabLeases),
+              Tab(text: l10n.tabTenants),
               Tab(text: l10n.tabUnitTypes),
               Tab(text: l10n.tabTeam),
             ],
@@ -168,6 +176,8 @@ class _PropertyDetail extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   UnitsTab(propertyId: property.id, canManage: canUnits),
+                  LeasesTab(propertyId: property.id, canManage: canLeases),
+                  TenantsTab(propertyId: property.id, canManage: canTenants),
                   UnitTypesTab(propertyId: property.id, canManage: canUnits),
                   TeamTab(propertyId: property.id, canManage: canAccess),
                 ],

@@ -710,6 +710,12 @@ abstract class AppLocalizations {
   /// **'Libre'**
   String get statusVacant;
 
+  /// Marks a deactivated tenant
+  ///
+  /// In fr, this message translates to:
+  /// **'Inactif'**
+  String get statusInactive;
+
   /// No description provided for @statusOccupied.
   ///
   /// In fr, this message translates to:
@@ -859,6 +865,414 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Nombre invalide'**
   String get positiveNumber;
+
+  /// No description provided for @tabLeases.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baux'**
+  String get tabLeases;
+
+  /// No description provided for @tabTenants.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataires'**
+  String get tabTenants;
+
+  /// No description provided for @addTenant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un locataire'**
+  String get addTenant;
+
+  /// No description provided for @editTenant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le locataire'**
+  String get editTenant;
+
+  /// No description provided for @tenantFullName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom complet'**
+  String get tenantFullName;
+
+  /// No description provided for @tenantPhone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléphone'**
+  String get tenantPhone;
+
+  /// No description provided for @tenantEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'E-mail (facultatif)'**
+  String get tenantEmail;
+
+  /// No description provided for @tenantNationalId.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pièce d’identité (facultatif)'**
+  String get tenantNationalId;
+
+  /// No description provided for @tenantEmergencyContact.
+  ///
+  /// In fr, this message translates to:
+  /// **'Contact d’urgence (facultatif)'**
+  String get tenantEmergencyContact;
+
+  /// No description provided for @tenantSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataire enregistré.'**
+  String get tenantSaved;
+
+  /// No description provided for @tenantDeactivated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataire désactivé.'**
+  String get tenantDeactivated;
+
+  /// No description provided for @deactivateTenant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désactiver ce locataire'**
+  String get deactivateTenant;
+
+  /// No description provided for @deactivateTenantTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désactiver ce locataire ?'**
+  String get deactivateTenantTitle;
+
+  /// No description provided for @deactivateTenantBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il conserve ses baux et son historique, mais ne pourra plus signer de nouveau bail.'**
+  String get deactivateTenantBody;
+
+  /// No description provided for @noTenantsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun locataire'**
+  String get noTenantsTitle;
+
+  /// No description provided for @noTenantsBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrez les personnes qui occupent vos logements.'**
+  String get noTenantsBody;
+
+  /// No description provided for @errTenantNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataire introuvable.'**
+  String get errTenantNotFound;
+
+  /// No description provided for @errTenantPhoneTaken.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce numéro est déjà utilisé par un autre locataire.'**
+  String get errTenantPhoneTaken;
+
+  /// No description provided for @addLease.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un bail'**
+  String get addLease;
+
+  /// No description provided for @leaseUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Logement à louer'**
+  String get leaseUnit;
+
+  /// No description provided for @leaseTenant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataire'**
+  String get leaseTenant;
+
+  /// No description provided for @leaseStartDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date de début'**
+  String get leaseStartDate;
+
+  /// No description provided for @leaseEndDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date de fin'**
+  String get leaseEndDate;
+
+  /// No description provided for @leaseMonthlyRent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Loyer mensuel (XAF)'**
+  String get leaseMonthlyRent;
+
+  /// No description provided for @leaseRentLockedHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Verrouillé à la signature du bail'**
+  String get leaseRentLockedHint;
+
+  /// No description provided for @leaseSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bail enregistré.'**
+  String get leaseSaved;
+
+  /// No description provided for @leaseTerminated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bail résilié. Le logement est de nouveau vacant.'**
+  String get leaseTerminated;
+
+  /// No description provided for @leaseExpiring.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bientôt échu'**
+  String get leaseExpiring;
+
+  /// No description provided for @terminateLease.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résilier le bail'**
+  String get terminateLease;
+
+  /// No description provided for @terminateLeaseTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résilier ce bail ?'**
+  String get terminateLeaseTitle;
+
+  /// No description provided for @terminateLeaseBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le logement devient vacant. Pour changer le loyer plus tard, signez un nouveau bail.'**
+  String get terminateLeaseBody;
+
+  /// No description provided for @noLeasesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun bail'**
+  String get noLeasesTitle;
+
+  /// No description provided for @noLeasesBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signez un bail pour lier un locataire à un logement et suivre le loyer.'**
+  String get noLeasesBody;
+
+  /// No description provided for @errLeaseNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bail introuvable.'**
+  String get errLeaseNotFound;
+
+  /// No description provided for @errLeaseAlreadyTerminated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce bail a déjà été résilié.'**
+  String get errLeaseAlreadyTerminated;
+
+  /// No description provided for @errUnitAlreadyLeased.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce logement a déjà un bail en cours. Résiliez-le d’abord.'**
+  String get errUnitAlreadyLeased;
+
+  /// No description provided for @errEndBeforeStart.
+  ///
+  /// In fr, this message translates to:
+  /// **'La date de fin doit être postérieure à la date de début.'**
+  String get errEndBeforeStart;
+
+  /// No description provided for @errNoVacantUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez un logement vacant avant de signer un bail.'**
+  String get errNoVacantUnit;
+
+  /// No description provided for @errNoTenantYet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrez un locataire avant de signer un bail.'**
+  String get errNoTenantYet;
+
+  /// A lease date, e.g. 3 Oct 2026
+  ///
+  /// In fr, this message translates to:
+  /// **'{date, date, ::yMMMd}'**
+  String leaseDate(DateTime date);
+
+  /// No description provided for @tabBills.
+  ///
+  /// In fr, this message translates to:
+  /// **'Factures'**
+  String get tabBills;
+
+  /// No description provided for @tabPayments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiements'**
+  String get tabPayments;
+
+  /// No description provided for @tabLedger.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grand Livre'**
+  String get tabLedger;
+
+  /// No description provided for @tabReports.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rapports'**
+  String get tabReports;
+
+  /// No description provided for @tabNotifications.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notifications'**
+  String get tabNotifications;
+
+  /// No description provided for @dashboardTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tableau de bord'**
+  String get dashboardTitle;
+
+  /// No description provided for @totalProperties.
+  ///
+  /// In fr, this message translates to:
+  /// **'Biens totaux'**
+  String get totalProperties;
+
+  /// No description provided for @totalTenants.
+  ///
+  /// In fr, this message translates to:
+  /// **'Locataires'**
+  String get totalTenants;
+
+  /// No description provided for @totalUnits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Logements'**
+  String get totalUnits;
+
+  /// No description provided for @occupiedUnits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Occupés'**
+  String get occupiedUnits;
+
+  /// No description provided for @vacantUnits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vacants'**
+  String get vacantUnits;
+
+  /// No description provided for @upcomingPayments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiements à venir'**
+  String get upcomingPayments;
+
+  /// No description provided for @recentActivity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activités récentes'**
+  String get recentActivity;
+
+  /// No description provided for @overdue.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get overdue;
+
+  /// No description provided for @dueSoon.
+  ///
+  /// In fr, this message translates to:
+  /// **'À venir'**
+  String get dueSoon;
+
+  /// No description provided for @paid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payé'**
+  String get paid;
+
+  /// No description provided for @unpaid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impayé'**
+  String get unpaid;
+
+  /// No description provided for @partial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partiel'**
+  String get partial;
+
+  /// No description provided for @amount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant'**
+  String get amount;
+
+  /// No description provided for @dueDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance'**
+  String get dueDate;
+
+  /// No description provided for @status.
+  ///
+  /// In fr, this message translates to:
+  /// **'Statut'**
+  String get status;
+
+  /// No description provided for @bills.
+  ///
+  /// In fr, this message translates to:
+  /// **'Factures'**
+  String get bills;
+
+  /// No description provided for @payments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiements'**
+  String get payments;
+
+  /// No description provided for @ledger.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grand Livre'**
+  String get ledger;
+
+  /// No description provided for @reports.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rapports'**
+  String get reports;
+
+  /// No description provided for @markAllRead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout marquer comme lu'**
+  String get markAllRead;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune notification'**
+  String get noNotifications;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir tout'**
+  String get viewAll;
 }
 
 class _AppLocalizationsDelegate

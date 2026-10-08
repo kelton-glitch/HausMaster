@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/domain/manager.dart';
 import 'tabs/dashboard_tab.dart';
-import '../properties/presentation/properties_screen.dart';
 import 'tabs/profile_tab.dart';
-import 'tabs/rent_tab.dart';
+import '../../features/bills/presentation/bills_screen.dart';
+import '../../features/payments/presentation/payments_screen.dart';
+import '../../features/ledger/presentation/ledger_screen.dart';
+import '../../features/reports/presentation/reports_screen.dart';
+import '../../features/notifications/presentation/notifications_screen.dart';
+import '../properties/presentation/properties_screen.dart';
 
 /// App shell. Phones get a bottom NavigationBar; wider screens (tablets,
 /// landscape) get a NavigationRail. Every primary area is one tap away (NFR-08).
@@ -26,9 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final destinations = [
-      (Icons.home_outlined, Icons.home, l10n.tabDashboard),
+      (Icons.dashboard_outlined, Icons.dashboard, l10n.tabDashboard),
       (Icons.apartment_outlined, Icons.apartment, l10n.tabProperties),
-      (Icons.receipt_long_outlined, Icons.receipt_long, l10n.tabRent),
+      (Icons.receipt_long_outlined, Icons.receipt_long, l10n.tabBills),
+      (Icons.payments_outlined, Icons.payments, l10n.tabPayments),
+      (Icons.account_balance_outlined, Icons.account_balance, l10n.tabLedger),
+      (Icons.analytics_outlined, Icons.analytics, l10n.tabReports),
+      (Icons.notifications_outlined, Icons.notifications, l10n.tabNotifications),
       (Icons.person_outline, Icons.person, l10n.tabProfile),
     ];
     // IndexedStack keeps each tab's state (scroll position, etc.) when switching.
@@ -37,7 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         DashboardTab(manager: widget.manager),
         const PropertiesScreen(),
-        const RentTab(),
+        const BillsScreen(),
+        const PaymentsScreen(),
+        const LedgerScreen(),
+        const ReportsScreen(),
+        const NotificationsScreen(),
         ProfileTab(manager: widget.manager),
       ],
     );

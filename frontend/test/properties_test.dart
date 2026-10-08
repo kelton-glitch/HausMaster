@@ -126,8 +126,7 @@ void main() {
       expect(find.text('Créez d’abord un type de logement'), findsOneWidget);
 
       // Unit type.
-      await tester.tap(find.text('Types'));
-      await tester.pumpAndSettle();
+      await tapTab(tester, 'Types');
       await tester.tap(_button('Ajouter un type'));
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(TextFormField).at(0), 'Studio');
@@ -139,8 +138,7 @@ void main() {
       expect(find.textContaining('XAF'), findsOneWidget);
 
       // Unit (the single type is preselected).
-      await tester.tap(find.text('Logements'));
-      await tester.pumpAndSettle();
+      await tapTab(tester, 'Logements');
       await tester.tap(_button('Ajouter un logement'));
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(TextFormField).first, 'a1');
@@ -220,8 +218,7 @@ void main() {
           findsOneWidget,
         ); // can add units
 
-        await tester.tap(find.text('Équipe'));
-        await tester.pumpAndSettle();
+        await tapTab(tester, 'Équipe');
         expect(
           find.byType(FloatingActionButton),
           findsNothing,
@@ -236,8 +233,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Résidence Bonanjo'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Équipe'));
-      await tester.pumpAndSettle();
+      await tapTab(tester, 'Équipe');
       expect(find.text('Ada Njoh (vous)'), findsOneWidget);
 
       await tester.tap(find.byType(FloatingActionButton));
@@ -297,9 +293,14 @@ void main() {
 
       await tester.tap(find.text('Résidence Bonanjo'));
       await tester.pumpAndSettle();
-      for (final tab in ['Logements', 'Types', 'Équipe']) {
-        await tester.tap(find.text(tab));
-        await tester.pumpAndSettle();
+      for (final tab in [
+        'Logements',
+        'Baux',
+        'Locataires',
+        'Types',
+        'Équipe',
+      ]) {
+        await tapTab(tester, tab);
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
       }
@@ -312,9 +313,14 @@ void main() {
       await openDetail(tester);
       await tester.tap(find.text('Résidence Bonanjo'));
       await tester.pumpAndSettle();
-      for (final tab in ['Logements', 'Types', 'Équipe']) {
-        await tester.tap(find.text(tab));
-        await tester.pumpAndSettle();
+      for (final tab in [
+        'Logements',
+        'Baux',
+        'Locataires',
+        'Types',
+        'Équipe',
+      ]) {
+        await tapTab(tester, tab);
       }
       expect(tester.takeException(), isNull);
     });

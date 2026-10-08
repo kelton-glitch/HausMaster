@@ -9,6 +9,12 @@ import 'package:hausmaster/features/properties/data/properties_repository.dart';
 import 'package:hausmaster/features/properties/domain/policy.dart';
 import 'package:hausmaster/features/properties/domain/property.dart';
 import 'package:hausmaster/features/properties/presentation/properties_providers.dart';
+import 'package:hausmaster/features/leases/data/leases_repository.dart';
+import 'package:hausmaster/features/leases/domain/lease.dart';
+import 'package:hausmaster/features/leases/presentation/leases_providers.dart';
+import 'package:hausmaster/features/tenants/data/tenants_repository.dart';
+import 'package:hausmaster/features/tenants/domain/tenant.dart';
+import 'package:hausmaster/features/tenants/presentation/tenants_providers.dart';
 import 'package:hausmaster/features/units/data/units_repository.dart';
 import 'package:hausmaster/features/units/domain/unit.dart';
 import 'package:hausmaster/features/units/presentation/units_providers.dart';
@@ -25,6 +31,8 @@ class _Prop {
   final types = <UnitType>[];
   final units = <Unit>[];
   final access = <AccessEntry>[];
+  final tenants = <Tenant>[];
+  final leases = <Lease>[];
 }
 
 /// In-memory stand-in for the whole API. Both fake repositories read and write
@@ -88,6 +96,88 @@ class FakeBackend {
   }
 
   _Prop _p(int id) => _props.firstWhere((p) => p.id == id);
+
+  /// Seeds a tenant directly, for tests that do not exercise the tenant form.
+  Tenant seedTenant(
+    int propertyId,
+    String fullName, {
+    String? phone,
+    bool isActive = true,
+  }) {
+    final p = _p(propertyId);
+    final t = Tenant(
+      id: nextId(),
+      propertyId: propertyId,
+      fullName: fullName,
+      phone: phone ?? '69000000${nextId()}',
+      isActive: isActive,
+    );
+    p.tenants.add(t);
+    return t;
+  }
+
+  List<int> tenantIds(int propertyId) =>
+      _p(propertyId).tenants.map((t) => t.id).toList();
+
+  /// Ids of the single seeded unit/tenant, so tests need not hardcode them.
+  int onlyUnitId(int propertyId) => _p(propertyId).units.single.id;
+
+  int onlyTenantId(int propertyId) => _p(propertyId).tenants.single.id;
+
+  Unit _unit(int propertyId, int unitId) =>
+      _p(propertyId).units.firstWhere((u) => u.id == unitId);
+
+  /// Seeds a signed lease, for tests that start from an occupied unit.
+  Lease seedLease(
+    int propertyId,
+    int unitId,
+    int tenantId, {
+    DateTime? startDate,
+    DateTime? endDate,
+    int monthlyRent = 85000,
+  }) {
+    final p = _p(propertyId);
+    final unit = _unit(propertyId, unitId);
+    final tenant = p.tenants.firstWhere((t) => t.id == tenantId);
+    final lease = Lease(
+      id: nextId(),
+      propertyId: propertyId,
+      unitId: unitId,
+      unitLabel: unit.label,
+      tenantId: tenantId,
+      tenantName: tenant.fullName,
+      startDate: startDate ?? DateTime.now(),
+      endDate: endDate ?? DateTime.now().add(const Duration(days: 365)),
+      monthlyRent: monthlyRent,
+      isActive: true,
+    );
+    p.leases.add(lease);
+    p.units[p.units.indexOf(unit)] = Unit(
+      id: unit.id,
+      propertyId: propertyId,
+      label: unit.label,
+      unitTypeId: unit.unitTypeId,
+      unitTypeName: unit.unitTypeName,
+      status: UnitStatus.occupied,
+    );
+    return lease;
+  }
+
+  Lease? leaseOf(int propertyId, int leaseId) {
+    for (final l in _p(propertyId).leases) {
+      if (l.id == leaseId) return l;
+    }
+    return null;
+  }
+
+  /// Ids are shared across entity kinds, so tests must not assume `1`.
+  Lease? onlyLease(int propertyId) {
+    final list = _p(propertyId).leases;
+    return list.length == 1 ? list.single : null;
+  }
+
+  UnitStatus statusOf(int propertyId, int unitId) =>
+      _unit(propertyId, unitId).status;
 
   Property _view(_Prop p) => Property(
     id: p.id,
@@ -262,6 +352,165 @@ class FakeUnitsRepository implements UnitsRepository {
   Future<void> deactivateUnitType(int propertyId, int unitTypeId) async {}
 }
 
+class FakeTenantsRepository implements TenantsRepository {
+  FakeTenantsRepository(this.b);
+  final FakeBackend b;
+
+  @override
+  Future<List<Tenant>> tenants(int propertyId) async =>
+      List.of(b._p(propertyId).tenants);
+
+  @override
+  Future<Tenant> createTenant(
+    int propertyId, {
+    required String fullName,
+    required String phone,
+    String? email,
+    String? nationalId,
+    String? emergencyContact,
+  }) async {
+    final p = b._p(propertyId);
+    if (p.tenants.any((t) => t.phone == phone)) {
+      throw const Failure(code: 'tenant_phone_taken', statusCode: 409);
+    }
+    final t = Tenant(
+      id: b.nextId(),
+      propertyId: propertyId,
+      fullName: fullName,
+      phone: phone,
+      email: email,
+      nationalId: nationalId,
+      emergencyContact: emergencyContact,
+      isActive: true,
+    );
+    p.tenants.add(t);
+    return t;
+  }
+
+  @override
+  Future<Tenant> updateTenant(
+    int propertyId,
+    int tenantId, {
+    required String fullName,
+    required String phone,
+    String? email,
+    String? nationalId,
+    String? emergencyContact,
+  }) async {
+    final p = b._p(propertyId);
+    final i = p.tenants.indexWhere((t) => t.id == tenantId);
+    p.tenants[i] = Tenant(
+      id: tenantId,
+      propertyId: propertyId,
+      fullName: fullName,
+      phone: phone,
+      email: email,
+      nationalId: nationalId,
+      emergencyContact: emergencyContact,
+      isActive: p.tenants[i].isActive,
+    );
+    return p.tenants[i];
+  }
+
+  @override
+  Future<void> deactivateTenant(int propertyId, int tenantId) async {
+    final p = b._p(propertyId);
+    final i = p.tenants.indexWhere((t) => t.id == tenantId);
+    final t = p.tenants[i];
+    p.tenants[i] = Tenant(
+      id: t.id,
+      propertyId: propertyId,
+      fullName: t.fullName,
+      phone: t.phone,
+      email: t.email,
+      nationalId: t.nationalId,
+      emergencyContact: t.emergencyContact,
+      isActive: false,
+    );
+  }
+}
+
+class FakeLeasesRepository implements LeasesRepository {
+  FakeLeasesRepository(this.b);
+  final FakeBackend b;
+
+  @override
+  Future<List<Lease>> leases(
+    int propertyId, {
+    bool includeTerminated = false,
+  }) async => b
+      ._p(propertyId)
+      .leases
+      .where((l) => includeTerminated || l.isActive)
+      .toList();
+
+  @override
+  Future<Lease> createLease(
+    int propertyId, {
+    required int unitId,
+    required int tenantId,
+    required DateTime startDate,
+    required DateTime endDate,
+    required int monthlyRent,
+  }) async {
+    final p = b._p(propertyId);
+    final unit = p.units.firstWhere((u) => u.id == unitId);
+    if (p.leases.any((l) => l.unitId == unitId && l.isActive)) {
+      throw const Failure(code: 'unit_already_leased', statusCode: 409);
+    }
+    final tenant = p.tenants.firstWhere((t) => t.id == tenantId);
+    final lease = Lease(
+      id: b.nextId(),
+      propertyId: propertyId,
+      unitId: unitId,
+      unitLabel: unit.label,
+      tenantId: tenantId,
+      tenantName: tenant.fullName,
+      startDate: startDate,
+      endDate: endDate,
+      monthlyRent: monthlyRent,
+      isActive: true,
+    );
+    p.leases.add(lease);
+    _occupy(p, unit, UnitStatus.occupied);
+    return lease;
+  }
+
+  @override
+  Future<void> terminateLease(int propertyId, int leaseId) async {
+    final p = b._p(propertyId);
+    final i = p.leases.indexWhere((l) => l.id == leaseId);
+    final l = p.leases[i];
+    final now = DateTime.now();
+    p.leases[i] = Lease(
+      id: l.id,
+      propertyId: propertyId,
+      unitId: l.unitId,
+      unitLabel: l.unitLabel,
+      tenantId: l.tenantId,
+      tenantName: l.tenantName,
+      startDate: l.startDate,
+      endDate: l.endDate,
+      monthlyRent: l.monthlyRent,
+      isActive: false,
+      terminatedAt: now,
+    );
+    final unit = p.units.firstWhere((u) => u.id == l.unitId);
+    _occupy(p, unit, UnitStatus.vacant);
+  }
+
+  void _occupy(_Prop p, Unit unit, UnitStatus status) {
+    p.units[p.units.indexOf(unit)] = Unit(
+      id: unit.id,
+      propertyId: unit.propertyId,
+      label: unit.label,
+      unitTypeId: unit.unitTypeId,
+      unitTypeName: unit.unitTypeName,
+      status: status,
+    );
+  }
+}
+
 class SignedInAda extends AuthController {
   @override
   Future<Manager?> build() async =>
@@ -274,6 +523,17 @@ class SignedInAda extends AuthController {
 class SignedOut extends AuthController {
   @override
   Future<Manager?> build() async => null;
+}
+
+/// Taps a tab label in the property detail [TabBar]. The bar is scrollable --
+/// five tabs do not fit across a 400px phone -- so the target is scrolled into
+/// view before it is tapped.
+Future<void> tapTab(WidgetTester tester, String label) async {
+  final tab = find.text(label);
+  await tester.ensureVisible(tab);
+  await tester.pumpAndSettle();
+  await tester.tap(tab);
+  await tester.pumpAndSettle();
 }
 
 /// Pumps the whole app on a phone-sized window, French device by default,
@@ -301,6 +561,8 @@ Future<FakeBackend> pumpApp(
           FakePropertiesRepository(be),
         ),
         unitsRepositoryProvider.overrideWithValue(FakeUnitsRepository(be)),
+        tenantsRepositoryProvider.overrideWithValue(FakeTenantsRepository(be)),
+        leasesRepositoryProvider.overrideWithValue(FakeLeasesRepository(be)),
       ],
       child: const HausMasterApp(),
     ),

@@ -15,6 +15,8 @@ final unitsProvider = FutureProvider.autoDispose.family<List<Unit>, int>((
 ) {
   ref.watch(authControllerProvider.select((s) => s.value?.id));
   ref.refreshOn<UnitsChanged>(where: (e) => e.propertyId == propertyId);
+  // Signing or ending a lease moves occupancy, which this list displays.
+  ref.refreshOn<LeasesChanged>(where: (e) => e.propertyId == propertyId);
   return ref.watch(unitsRepositoryProvider).units(propertyId);
 });
 

@@ -20,6 +20,7 @@ final propertiesProvider = FutureProvider<List<Property>>((ref) async {
   // Refresh when a property changes or when units change (occupancy counts).
   ref.refreshOn<PropertyChanged>();
   ref.refreshOn<UnitsChanged>();
+  ref.refreshOn<LeasesChanged>();
   if (userId == null) return const [];
   return ref.watch(propertiesRepositoryProvider).list();
 });
@@ -33,6 +34,7 @@ final propertyProvider = FutureProvider.autoDispose.family<Property, int>((
     where: (e) => e.propertyId == null || e.propertyId == id,
   );
   ref.refreshOn<UnitsChanged>(where: (e) => e.propertyId == id);
+  ref.refreshOn<LeasesChanged>(where: (e) => e.propertyId == id);
   return ref.watch(propertiesRepositoryProvider).get(id);
 });
 

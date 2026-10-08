@@ -65,6 +65,11 @@ String failureText(BuildContext context, Object error) {
     'unit_not_found' => l10n.errUnitNotFound,
     'unit_type_name_taken' => l10n.errUnitTypeNameTaken,
     'unit_label_taken' => l10n.errUnitLabelTaken,
+    'tenant_not_found' => l10n.errTenantNotFound,
+    'tenant_phone_taken' => l10n.errTenantPhoneTaken,
+    'lease_not_found' => l10n.errLeaseNotFound,
+    'lease_already_terminated' => l10n.errLeaseAlreadyTerminated,
+    'unit_already_leased' => l10n.errUnitAlreadyLeased,
     _ => l10n.errGeneric,
   };
 }

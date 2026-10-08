@@ -11,11 +11,24 @@ enum Role {
       Role.values.firstWhere((r) => r.value == value, orElse: () => coManager);
 }
 
-enum PropertyAction { view, edit, deactivate, manageAccess, manageUnits }
+enum PropertyAction {
+  view,
+  edit,
+  deactivate,
+  manageAccess,
+  manageUnits,
+  manageTenants,
+  manageLeases,
+}
 
 const _policy = <Role, Set<PropertyAction>>{
   Role.owner: {...PropertyAction.values},
-  Role.coManager: {PropertyAction.view, PropertyAction.manageUnits},
+  Role.coManager: {
+    PropertyAction.view,
+    PropertyAction.manageUnits,
+    PropertyAction.manageTenants,
+    PropertyAction.manageLeases,
+  },
 };
 
 bool can(Role role, PropertyAction action) => _policy[role]!.contains(action);

@@ -29,6 +29,19 @@ class AccessChanged extends AppEvent {
   final int propertyId;
 }
 
+/// Tenants of a property changed.
+class TenantsChanged extends AppEvent {
+  const TenantsChanged(this.propertyId);
+  final int propertyId;
+}
+
+/// Leases of a property changed. Signing or ending a lease also moves unit
+/// occupancy, so the units list listens to this too.
+class LeasesChanged extends AppEvent {
+  const LeasesChanged(this.propertyId);
+  final int propertyId;
+}
+
 class AppEvents {
   final _controller = StreamController<AppEvent>.broadcast();
 

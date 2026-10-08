@@ -80,10 +80,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: AutofillGroup(
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
+                    child: Card(
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(Spacing.xl),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
                         Semantics(
                           header: true,
                           child: Text(
@@ -149,6 +153,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Text(l10n.createAccount),
                         ),
                       ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

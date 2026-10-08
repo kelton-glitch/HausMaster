@@ -331,6 +331,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get statusVacant => 'Libre';
 
   @override
+  String get statusInactive => 'Inactif';
+
+  @override
   String get statusOccupied => 'Occupé';
 
   @override
@@ -415,4 +418,221 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get positiveNumber => 'Nombre invalide';
+
+  @override
+  String get tabLeases => 'Baux';
+
+  @override
+  String get tabTenants => 'Locataires';
+
+  @override
+  String get addTenant => 'Ajouter un locataire';
+
+  @override
+  String get editTenant => 'Modifier le locataire';
+
+  @override
+  String get tenantFullName => 'Nom complet';
+
+  @override
+  String get tenantPhone => 'Téléphone';
+
+  @override
+  String get tenantEmail => 'E-mail (facultatif)';
+
+  @override
+  String get tenantNationalId => 'Pièce d’identité (facultatif)';
+
+  @override
+  String get tenantEmergencyContact => 'Contact d’urgence (facultatif)';
+
+  @override
+  String get tenantSaved => 'Locataire enregistré.';
+
+  @override
+  String get tenantDeactivated => 'Locataire désactivé.';
+
+  @override
+  String get deactivateTenant => 'Désactiver ce locataire';
+
+  @override
+  String get deactivateTenantTitle => 'Désactiver ce locataire ?';
+
+  @override
+  String get deactivateTenantBody =>
+      'Il conserve ses baux et son historique, mais ne pourra plus signer de nouveau bail.';
+
+  @override
+  String get noTenantsTitle => 'Aucun locataire';
+
+  @override
+  String get noTenantsBody =>
+      'Enregistrez les personnes qui occupent vos logements.';
+
+  @override
+  String get errTenantNotFound => 'Locataire introuvable.';
+
+  @override
+  String get errTenantPhoneTaken =>
+      'Ce numéro est déjà utilisé par un autre locataire.';
+
+  @override
+  String get addLease => 'Ajouter un bail';
+
+  @override
+  String get leaseUnit => 'Logement à louer';
+
+  @override
+  String get leaseTenant => 'Locataire';
+
+  @override
+  String get leaseStartDate => 'Date de début';
+
+  @override
+  String get leaseEndDate => 'Date de fin';
+
+  @override
+  String get leaseMonthlyRent => 'Loyer mensuel (XAF)';
+
+  @override
+  String get leaseRentLockedHint => 'Verrouillé à la signature du bail';
+
+  @override
+  String get leaseSaved => 'Bail enregistré.';
+
+  @override
+  String get leaseTerminated =>
+      'Bail résilié. Le logement est de nouveau vacant.';
+
+  @override
+  String get leaseExpiring => 'Bientôt échu';
+
+  @override
+  String get terminateLease => 'Résilier le bail';
+
+  @override
+  String get terminateLeaseTitle => 'Résilier ce bail ?';
+
+  @override
+  String get terminateLeaseBody =>
+      'Le logement devient vacant. Pour changer le loyer plus tard, signez un nouveau bail.';
+
+  @override
+  String get noLeasesTitle => 'Aucun bail';
+
+  @override
+  String get noLeasesBody =>
+      'Signez un bail pour lier un locataire à un logement et suivre le loyer.';
+
+  @override
+  String get errLeaseNotFound => 'Bail introuvable.';
+
+  @override
+  String get errLeaseAlreadyTerminated => 'Ce bail a déjà été résilié.';
+
+  @override
+  String get errUnitAlreadyLeased =>
+      'Ce logement a déjà un bail en cours. Résiliez-le d’abord.';
+
+  @override
+  String get errEndBeforeStart =>
+      'La date de fin doit être postérieure à la date de début.';
+
+  @override
+  String get errNoVacantUnit =>
+      'Ajoutez un logement vacant avant de signer un bail.';
+
+  @override
+  String get errNoTenantYet =>
+      'Enregistrez un locataire avant de signer un bail.';
+
+  @override
+  String leaseDate(DateTime date) {
+    String _temp0 = intl.DateFormat.yMMMd(localeName).format(date);
+    return '$_temp0';
+  }
+
+  @override
+  String get tabBills => 'Factures';
+
+  @override
+  String get tabPayments => 'Paiements';
+
+  @override
+  String get tabLedger => 'Grand Livre';
+
+  @override
+  String get tabReports => 'Rapports';
+
+  @override
+  String get tabNotifications => 'Notifications';
+
+  @override
+  String get dashboardTitle => 'Tableau de bord';
+
+  @override
+  String get totalProperties => 'Biens totaux';
+
+  @override
+  String get totalTenants => 'Locataires';
+
+  @override
+  String get totalUnits => 'Logements';
+
+  @override
+  String get occupiedUnits => 'Occupés';
+
+  @override
+  String get vacantUnits => 'Vacants';
+
+  @override
+  String get upcomingPayments => 'Paiements à venir';
+
+  @override
+  String get recentActivity => 'Activités récentes';
+
+  @override
+  String get overdue => 'En retard';
+
+  @override
+  String get dueSoon => 'À venir';
+
+  @override
+  String get paid => 'Payé';
+
+  @override
+  String get unpaid => 'Impayé';
+
+  @override
+  String get partial => 'Partiel';
+
+  @override
+  String get amount => 'Montant';
+
+  @override
+  String get dueDate => 'Échéance';
+
+  @override
+  String get status => 'Statut';
+
+  @override
+  String get bills => 'Factures';
+
+  @override
+  String get payments => 'Paiements';
+
+  @override
+  String get ledger => 'Grand Livre';
+
+  @override
+  String get reports => 'Rapports';
+
+  @override
+  String get markAllRead => 'Tout marquer comme lu';
+
+  @override
+  String get noNotifications => 'Aucune notification';
+
+  @override
+  String get viewAll => 'Voir tout';
 }

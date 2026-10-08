@@ -330,6 +330,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statusVacant => 'Vacant';
 
   @override
+  String get statusInactive => 'Inactive';
+
+  @override
   String get statusOccupied => 'Occupied';
 
   @override
@@ -414,4 +417,217 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get positiveNumber => 'Invalid number';
+
+  @override
+  String get tabLeases => 'Leases';
+
+  @override
+  String get tabTenants => 'Tenants';
+
+  @override
+  String get addTenant => 'Add tenant';
+
+  @override
+  String get editTenant => 'Edit tenant';
+
+  @override
+  String get tenantFullName => 'Full name';
+
+  @override
+  String get tenantPhone => 'Phone';
+
+  @override
+  String get tenantEmail => 'Email (optional)';
+
+  @override
+  String get tenantNationalId => 'National ID (optional)';
+
+  @override
+  String get tenantEmergencyContact => 'Emergency contact (optional)';
+
+  @override
+  String get tenantSaved => 'Tenant saved.';
+
+  @override
+  String get tenantDeactivated => 'Tenant deactivated.';
+
+  @override
+  String get deactivateTenant => 'Deactivate tenant';
+
+  @override
+  String get deactivateTenantTitle => 'Deactivate this tenant?';
+
+  @override
+  String get deactivateTenantBody =>
+      'They keep their leases and history, but cannot sign a new one.';
+
+  @override
+  String get noTenantsTitle => 'No tenants yet';
+
+  @override
+  String get noTenantsBody => 'Register the people who live in your units.';
+
+  @override
+  String get errTenantNotFound => 'Tenant not found.';
+
+  @override
+  String get errTenantPhoneTaken =>
+      'This phone number is already used by another tenant.';
+
+  @override
+  String get addLease => 'Add lease';
+
+  @override
+  String get leaseUnit => 'Unit to rent';
+
+  @override
+  String get leaseTenant => 'Tenant';
+
+  @override
+  String get leaseStartDate => 'Start date';
+
+  @override
+  String get leaseEndDate => 'End date';
+
+  @override
+  String get leaseMonthlyRent => 'Monthly rent (XAF)';
+
+  @override
+  String get leaseRentLockedHint => 'Locked when the lease is signed';
+
+  @override
+  String get leaseSaved => 'Lease signed.';
+
+  @override
+  String get leaseTerminated => 'Lease terminated. The unit is vacant again.';
+
+  @override
+  String get leaseExpiring => 'Expiring';
+
+  @override
+  String get terminateLease => 'Terminate lease';
+
+  @override
+  String get terminateLeaseTitle => 'Terminate this lease?';
+
+  @override
+  String get terminateLeaseBody =>
+      'The unit becomes vacant. To change the rent later, sign a new lease.';
+
+  @override
+  String get noLeasesTitle => 'No leases yet';
+
+  @override
+  String get noLeasesBody =>
+      'Sign a lease to link a tenant to a unit and start tracking rent.';
+
+  @override
+  String get errLeaseNotFound => 'Lease not found.';
+
+  @override
+  String get errLeaseAlreadyTerminated =>
+      'This lease has already been terminated.';
+
+  @override
+  String get errUnitAlreadyLeased =>
+      'This unit already has an open lease. Terminate it first.';
+
+  @override
+  String get errEndBeforeStart => 'The end date must be after the start date.';
+
+  @override
+  String get errNoVacantUnit => 'Add a vacant unit before signing a lease.';
+
+  @override
+  String get errNoTenantYet => 'Register a tenant before signing a lease.';
+
+  @override
+  String leaseDate(DateTime date) {
+    String _temp0 = intl.DateFormat.yMMMd(localeName).format(date);
+    return '$_temp0';
+  }
+
+  @override
+  String get tabBills => 'Bills';
+
+  @override
+  String get tabPayments => 'Payments';
+
+  @override
+  String get tabLedger => 'Ledger';
+
+  @override
+  String get tabReports => 'Reports';
+
+  @override
+  String get tabNotifications => 'Notifications';
+
+  @override
+  String get dashboardTitle => 'Dashboard';
+
+  @override
+  String get totalProperties => 'Total Properties';
+
+  @override
+  String get totalTenants => 'Tenants';
+
+  @override
+  String get totalUnits => 'Units';
+
+  @override
+  String get occupiedUnits => 'Occupied';
+
+  @override
+  String get vacantUnits => 'Vacant';
+
+  @override
+  String get upcomingPayments => 'Upcoming Payments';
+
+  @override
+  String get recentActivity => 'Recent Activity';
+
+  @override
+  String get overdue => 'Overdue';
+
+  @override
+  String get dueSoon => 'Due Soon';
+
+  @override
+  String get paid => 'Paid';
+
+  @override
+  String get unpaid => 'Unpaid';
+
+  @override
+  String get partial => 'Partial';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get dueDate => 'Due Date';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get bills => 'Bills';
+
+  @override
+  String get payments => 'Payments';
+
+  @override
+  String get ledger => 'Ledger';
+
+  @override
+  String get reports => 'Reports';
+
+  @override
+  String get markAllRead => 'Mark all as read';
+
+  @override
+  String get noNotifications => 'No notifications';
+
+  @override
+  String get viewAll => 'View all';
 }
