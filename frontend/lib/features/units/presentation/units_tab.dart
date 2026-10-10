@@ -6,6 +6,7 @@ import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/dialogs.dart';
 import '../../../core/widgets/empty_state.dart';
 import '../../../core/widgets/form_sheet.dart';
+import '../../../core/widgets/status_chip.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/unit.dart';
 import 'unit_form_sheet.dart';
@@ -116,16 +117,28 @@ class _UnitCard extends StatelessWidget {
       child: ListTile(
         minTileHeight: 64,
         onTap: onTap,
-        leading: const Icon(Icons.door_front_door_outlined),
-        title: Text(unit.label),
-        subtitle: Text(unit.unitTypeName),
-        trailing: Chip(
-          visualDensity: VisualDensity.compact,
-          avatar: Icon(
-            occupied ? Icons.person : Icons.check_circle_outline,
-            size: 16,
+        leading: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(AppRadius.field),
           ),
-          label: Text(occupied ? l10n.statusOccupied : l10n.statusVacant),
+          child: SizedBox.square(
+            dimension: 44,
+            child: Icon(
+              Icons.door_front_door_outlined,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+          ),
+        ),
+        title: Text(
+          unit.label,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
+        subtitle: Text(unit.unitTypeName),
+        trailing: StatusChip(
+          icon: occupied ? Icons.person : Icons.check_circle_outline,
+          label: occupied ? l10n.statusOccupied : l10n.statusVacant,
+          tone: occupied ? StatusTone.primary : StatusTone.success,
         ),
       ),
     );

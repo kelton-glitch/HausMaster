@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/widgets/status_chip.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/policy.dart';
 
@@ -13,13 +14,10 @@ class RoleBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final owner = role == Role.owner;
-    return Chip(
-      visualDensity: VisualDensity.compact,
-      avatar: Icon(
-        owner ? Icons.verified_user_outlined : Icons.group_outlined,
-        size: 16,
-      ),
-      label: Text(owner ? l10n.roleOwner : l10n.roleCoManager),
+    return StatusChip(
+      icon: owner ? Icons.verified_user_outlined : Icons.group_outlined,
+      label: owner ? l10n.roleOwner : l10n.roleCoManager,
+      tone: owner ? StatusTone.primary : StatusTone.neutral,
     );
   }
 }

@@ -167,14 +167,116 @@ abstract class AppLocalizations {
   /// No description provided for @loginTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Bon retour'**
+  /// **'Bienvenue'**
   String get loginTitle;
 
   /// No description provided for @loginSubtitle.
   ///
   /// In fr, this message translates to:
-  /// **'Connectez-vous pour gérer vos locations.'**
+  /// **'Connectez-vous pour gérer vos propriétés, locataires et loyers.'**
   String get loginSubtitle;
+
+  /// No description provided for @authTagline.
+  ///
+  /// In fr, this message translates to:
+  /// **'La gestion locative simplifiée pour le Cameroun'**
+  String get authTagline;
+
+  /// No description provided for @newToApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau sur HausMaster ?'**
+  String get newToApp;
+
+  /// No description provided for @createManagerAccount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un compte gérant'**
+  String get createManagerAccount;
+
+  /// No description provided for @languageSwitch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue : Français (FR)'**
+  String get languageSwitch;
+
+  /// No description provided for @languageSwitchHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passer en anglais'**
+  String get languageSwitchHint;
+
+  /// No description provided for @propertiesCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 propriété} other{{count} propriétés}}'**
+  String propertiesCount(int count);
+
+  /// No description provided for @unitsCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 unité} other{{count} unités}}'**
+  String unitsCount(int count);
+
+  /// No description provided for @propertiesHeading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vos propriétés'**
+  String get propertiesHeading;
+
+  /// No description provided for @occupancyRate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taux d’occupation'**
+  String get occupancyRate;
+
+  /// No description provided for @searchProperties.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rechercher par nom ou ville…'**
+  String get searchProperties;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes'**
+  String get filterAll;
+
+  /// No description provided for @filterOccupied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Occupées'**
+  String get filterOccupied;
+
+  /// No description provided for @filterVacant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vacantes'**
+  String get filterVacant;
+
+  /// No description provided for @occupancyLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Occupation'**
+  String get occupancyLabel;
+
+  /// No description provided for @viewProperty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir'**
+  String get viewProperty;
+
+  /// No description provided for @noResultsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun résultat'**
+  String get noResultsTitle;
+
+  /// No description provided for @noResultsBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Essayez un autre nom ou un autre filtre.'**
+  String get noResultsBody;
 
   /// No description provided for @registerSubtitle.
   ///

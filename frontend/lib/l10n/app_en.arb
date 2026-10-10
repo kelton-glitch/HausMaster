@@ -11,8 +11,39 @@
   "haveAccount": "I already have an account",
   "logout": "Sign out",
   "welcome": "Welcome, {name}",
-  "loginTitle": "Welcome back",
-  "loginSubtitle": "Sign in to manage your rentals.",
+  "loginTitle": "Welcome",
+  "loginSubtitle": "Sign in to manage your properties, tenants and rents.",
+  "authTagline": "Simplified rental management for Cameroon",
+  "newToApp": "New to HausMaster?",
+  "createManagerAccount": "Create a manager account",
+  "languageSwitch": "Language: English (EN)",
+  "languageSwitchHint": "Switch to French",
+  "propertiesCount": "{count, plural, =1{1 property} other{{count} properties}}",
+  "@propertiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unitsCount": "{count, plural, =1{1 unit} other{{count} units}}",
+  "@unitsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "propertiesHeading": "Your properties",
+  "occupancyRate": "Occupancy rate",
+  "searchProperties": "Search by name or city…",
+  "filterAll": "All",
+  "filterOccupied": "Occupied",
+  "filterVacant": "Vacant",
+  "occupancyLabel": "Occupancy",
+  "viewProperty": "View",
+  "noResultsTitle": "No results",
+  "noResultsBody": "Try another name or filter.",
   "registerSubtitle": "Track rent, tenants and bills in one place.",
   "showPassword": "Show password",
   "hidePassword": "Hide password",

@@ -10,6 +10,7 @@ import '../../../core/widgets/error_banner.dart';
 import '../../../core/widgets/password_field.dart';
 import '../../../l10n/app_localizations.dart';
 import 'auth_controller.dart';
+import 'auth_header.dart';
 import 'register_screen.dart';
 import 'validators.dart';
 
@@ -63,6 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     final auth = ref.watch(authControllerProvider);
     return Scaffold(
       body: SafeArea(
@@ -72,92 +74,103 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               true, // keyboard-dismiss tap must not be announced
           onTap: () => FocusScope.of(context).unfocus(),
           child: ContentWidth(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(Spacing.lg),
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                child: AutofillGroup(
-                  child: Form(
-                    key: _formKey,
-                    child: Card(
-                      elevation: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(Spacing.xl),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                        Semantics(
-                          header: true,
-                          child: Text(
-                            'HausMaster',
-                            style: theme.textTheme.headlineMedium?.copyWith(
-                              color: theme.colorScheme.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(Spacing.lg),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: Spacing.md),
+                  const AuthBrand(),
+                  const SizedBox(height: Spacing.xl),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      l10n.loginTitle,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.headlineLarge,
+                    ),
+                  ),
+                  const SizedBox(height: Spacing.sm),
+                  Text(
+                    l10n.loginSubtitle,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: scheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: Spacing.lg),
+                  const AuthHero(),
+                  const SizedBox(height: Spacing.lg),
+                  AutofillGroup(
+                    child: Form(
+                      key: _formKey,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(Spacing.lg),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextFormField(
+                                controller: _email,
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                autofillHints: const [AutofillHints.email],
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                onFieldSubmitted: (_) =>
+                                    _passwordFocus.requestFocus(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.email,
+                                  prefixIcon: const Icon(Icons.mail_outline),
+                                ),
+                                validator: (v) => validateEmail(l10n, v),
+                              ),
+                              const SizedBox(height: Spacing.md),
+                              PasswordField(
+                                controller: _password,
+                                focusNode: _passwordFocus,
+                                label: l10n.password,
+                                textInputAction: TextInputAction.done,
+                                onSubmitted: (_) => _submit(),
+                                validator: (v) => validateRequired(l10n, v),
+                              ),
+                              if (auth.hasError) ...[
+                                const SizedBox(height: Spacing.md),
+                                ErrorBanner(failureText(context, auth.error!)),
+                              ],
+                              const SizedBox(height: Spacing.lg),
+                              AppButton(
+                                label: l10n.login,
+                                loading: _loading,
+                                onPressed: _submit,
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(height: Spacing.lg),
-                        Semantics(
-                          header: true,
-                          child: Text(
-                            l10n.loginTitle,
-                            style: theme.textTheme.headlineSmall,
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.xs),
-                        Text(
-                          l10n.loginSubtitle,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                        const SizedBox(height: Spacing.xl),
-                        TextFormField(
-                          controller: _email,
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          autofillHints: const [AutofillHints.email],
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          onFieldSubmitted: (_) =>
-                              _passwordFocus.requestFocus(),
-                          decoration: InputDecoration(
-                            labelText: l10n.email,
-                            prefixIcon: const Icon(Icons.mail_outline),
-                          ),
-                          validator: (v) => validateEmail(l10n, v),
-                        ),
-                        const SizedBox(height: Spacing.md),
-                        PasswordField(
-                          controller: _password,
-                          focusNode: _passwordFocus,
-                          label: l10n.password,
-                          textInputAction: TextInputAction.done,
-                          onSubmitted: (_) => _submit(),
-                          validator: (v) => validateRequired(l10n, v),
-                        ),
-                        if (auth.hasError) ...[
-                          const SizedBox(height: Spacing.md),
-                          ErrorBanner(failureText(context, auth.error!)),
-                        ],
-                        const SizedBox(height: Spacing.lg),
-                        AppButton(
-                          label: l10n.login,
-                          loading: _loading,
-                          onPressed: _submit,
-                        ),
-                        const SizedBox(height: Spacing.sm),
-                        TextButton(
-                          onPressed: _loading ? null : _openRegister,
-                          child: Text(l10n.createAccount),
-                        ),
-                      ],
                         ),
                       ),
                     ),
                   ),
-                ),
+                  const SizedBox(height: Spacing.lg),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        l10n.newToApp,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: _loading ? null : _openRegister,
+                        child: Text(l10n.createManagerAccount),
+                      ),
+                    ],
+                  ),
+                  const Divider(height: Spacing.lg),
+                  const Center(child: LanguageSwitch()),
+                ],
               ),
             ),
           ),

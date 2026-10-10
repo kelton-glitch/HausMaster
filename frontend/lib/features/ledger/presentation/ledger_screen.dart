@@ -10,7 +10,6 @@ class LedgerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.ledger)),
       body: EmptyState(
         icon: Icons.account_balance_outlined,
         title: l10n.ledger,

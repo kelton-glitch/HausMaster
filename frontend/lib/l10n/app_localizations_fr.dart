@@ -44,10 +44,78 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get loginTitle => 'Bon retour';
+  String get loginTitle => 'Bienvenue';
 
   @override
-  String get loginSubtitle => 'Connectez-vous pour gérer vos locations.';
+  String get loginSubtitle =>
+      'Connectez-vous pour gérer vos propriétés, locataires et loyers.';
+
+  @override
+  String get authTagline => 'La gestion locative simplifiée pour le Cameroun';
+
+  @override
+  String get newToApp => 'Nouveau sur HausMaster ?';
+
+  @override
+  String get createManagerAccount => 'Créer un compte gérant';
+
+  @override
+  String get languageSwitch => 'Langue : Français (FR)';
+
+  @override
+  String get languageSwitchHint => 'Passer en anglais';
+
+  @override
+  String propertiesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count propriétés',
+      one: '1 propriété',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String unitsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count unités',
+      one: '1 unité',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get propertiesHeading => 'Vos propriétés';
+
+  @override
+  String get occupancyRate => 'Taux d’occupation';
+
+  @override
+  String get searchProperties => 'Rechercher par nom ou ville…';
+
+  @override
+  String get filterAll => 'Toutes';
+
+  @override
+  String get filterOccupied => 'Occupées';
+
+  @override
+  String get filterVacant => 'Vacantes';
+
+  @override
+  String get occupancyLabel => 'Occupation';
+
+  @override
+  String get viewProperty => 'Voir';
+
+  @override
+  String get noResultsTitle => 'Aucun résultat';
+
+  @override
+  String get noResultsBody => 'Essayez un autre nom ou un autre filtre.';
 
   @override
   String get registerSubtitle =>

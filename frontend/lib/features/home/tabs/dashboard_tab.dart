@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/content_width.dart';
+import '../../../core/widgets/stat_card.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/domain/manager.dart';
 import '../../properties/presentation/properties_providers.dart';
@@ -48,37 +49,46 @@ class DashboardTab extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: Spacing.lg),
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            crossAxisSpacing: Spacing.md,
-            mainAxisSpacing: Spacing.md,
-            childAspectRatio: 1.6,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _StatCard(
-                icon: Icons.apartment_outlined,
-                title: l10n.totalProperties,
-                value: totalProperties.toString(),
-                color: theme.colorScheme.primary,
+              Expanded(
+                child: StatCard(
+                  icon: Icons.apartment_outlined,
+                  label: l10n.totalProperties,
+                  value: totalProperties.toString(),
+                ),
               ),
-              _StatCard(
-                icon: Icons.people_outline,
-                title: l10n.totalTenants,
-                value: totalTenants.toString(),
-                color: theme.colorScheme.secondary,
+              const SizedBox(width: Spacing.md),
+              Expanded(
+                child: StatCard(
+                  icon: Icons.people_outline,
+                  label: l10n.totalTenants,
+                  value: totalTenants.toString(),
+                ),
               ),
-              _StatCard(
-                icon: Icons.door_front_door_outlined,
-                title: l10n.totalUnits,
-                value: totalUnits.toString(),
-                color: theme.colorScheme.tertiary,
+            ],
+          ),
+          const SizedBox(height: Spacing.md),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: StatCard(
+                  icon: Icons.door_front_door_outlined,
+                  label: l10n.totalUnits,
+                  value: totalUnits.toString(),
+                ),
               ),
-              _StatCard(
-                icon: Icons.person_pin_outlined,
-                title: l10n.occupiedUnits,
-                value: occupiedUnits.toString(),
-                color: theme.colorScheme.primaryContainer,
+              const SizedBox(width: Spacing.md),
+              Expanded(
+                child: StatCard(
+                  icon: Icons.person_pin_outlined,
+                  label: l10n.occupiedUnits,
+                  value: occupiedUnits.toString(),
+                  tint: context.appColors.successContainer,
+                  onTint: context.appColors.success,
+                ),
               ),
             ],
           ),
@@ -123,55 +133,6 @@ class DashboardTab extends ConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  const _StatCard({
-    required this.icon,
-    required this.title,
-    required this.value,
-    required this.color,
-  });
-
-  final IconData icon;
-  final String title;
-  final String value;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(Spacing.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(icon, color: color, size: 32),
-                Text(
-                  value,
-                  style: theme.textTheme.headlineMedium?.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Text(
-              title,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

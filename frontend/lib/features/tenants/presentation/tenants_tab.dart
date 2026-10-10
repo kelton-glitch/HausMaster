@@ -7,7 +7,9 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/async_view.dart';
 import '../../../core/widgets/dialogs.dart';
 import '../../../core/widgets/empty_state.dart';
+import '../../../core/format.dart';
 import '../../../core/widgets/form_sheet.dart';
+import '../../../core/widgets/status_chip.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/tenant.dart';
 import 'tenant_form_sheet.dart';
@@ -130,18 +132,29 @@ class _TenantCard extends StatelessWidget {
       child: ListTile(
         minTileHeight: 64,
         onTap: onTap,
-        leading: Icon(
-          tenant.isActive ? Icons.person_outline : Icons.person_off_outlined,
+        leading: CircleAvatar(
+          backgroundColor: tenant.isActive
+              ? Theme.of(context).colorScheme.primaryContainer
+              : context.appColors.neutralContainer,
+          foregroundColor: tenant.isActive
+              ? Theme.of(context).colorScheme.onPrimaryContainer
+              : context.appColors.neutral,
+          child: Text(
+            initialsOf(tenant.fullName),
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
         ),
-        title: Text(tenant.fullName),
+        title: Text(
+          tenant.fullName,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
         subtitle: Text([tenant.phone, ?tenant.nationalId].join(' · ')),
         // A deactivated tenant is kept for its leases but cannot be
         // deactivated twice.
         trailing: !tenant.isActive
-            ? Chip(
-                visualDensity: VisualDensity.compact,
-                avatar: const Icon(Icons.person_off_outlined, size: 16),
-                label: Text(l10n.statusInactive),
+            ? StatusChip(
+                icon: Icons.person_off_outlined,
+                label: l10n.statusInactive,
               )
             : onDeactivate == null
             ? null

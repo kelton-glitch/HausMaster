@@ -14,12 +14,7 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.notifications),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(l10n.markAllRead),
-          ),
-        ],
+        actions: [TextButton(onPressed: () {}, child: Text(l10n.markAllRead))],
       ),
       body: ContentWidth(
         child: ListView(

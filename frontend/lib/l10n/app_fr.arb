@@ -18,8 +18,39 @@
       }
     }
   },
-  "loginTitle": "Bon retour",
-  "loginSubtitle": "Connectez-vous pour gérer vos locations.",
+  "loginTitle": "Bienvenue",
+  "loginSubtitle": "Connectez-vous pour gérer vos propriétés, locataires et loyers.",
+  "authTagline": "La gestion locative simplifiée pour le Cameroun",
+  "newToApp": "Nouveau sur HausMaster ?",
+  "createManagerAccount": "Créer un compte gérant",
+  "languageSwitch": "Langue : Français (FR)",
+  "languageSwitchHint": "Passer en anglais",
+  "propertiesCount": "{count, plural, =1{1 propriété} other{{count} propriétés}}",
+  "@propertiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unitsCount": "{count, plural, =1{1 unité} other{{count} unités}}",
+  "@unitsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "propertiesHeading": "Vos propriétés",
+  "occupancyRate": "Taux d’occupation",
+  "searchProperties": "Rechercher par nom ou ville…",
+  "filterAll": "Toutes",
+  "filterOccupied": "Occupées",
+  "filterVacant": "Vacantes",
+  "occupancyLabel": "Occupation",
+  "viewProperty": "Voir",
+  "noResultsTitle": "Aucun résultat",
+  "noResultsBody": "Essayez un autre nom ou un autre filtre.",
   "registerSubtitle": "Suivez loyers, locataires et factures au même endroit.",
   "showPassword": "Afficher le mot de passe",
   "hidePassword": "Masquer le mot de passe",

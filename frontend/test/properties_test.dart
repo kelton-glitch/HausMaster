@@ -311,6 +311,8 @@ void main() {
       tester.platformDispatcher.textScaleFactorTestValue = 2.0;
       addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
       await openDetail(tester);
+      await tester.ensureVisible(find.text('Résidence Bonanjo'));
+      await tester.pump();
       await tester.tap(find.text('Résidence Bonanjo'));
       await tester.pumpAndSettle();
       for (final tab in [

@@ -10,7 +10,6 @@ class PaymentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.payments)),
       body: EmptyState(
         icon: Icons.payments_outlined,
         title: l10n.payments,

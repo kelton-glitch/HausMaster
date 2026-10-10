@@ -44,10 +44,78 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get loginTitle => 'Welcome back';
+  String get loginTitle => 'Welcome';
 
   @override
-  String get loginSubtitle => 'Sign in to manage your rentals.';
+  String get loginSubtitle =>
+      'Sign in to manage your properties, tenants and rents.';
+
+  @override
+  String get authTagline => 'Simplified rental management for Cameroon';
+
+  @override
+  String get newToApp => 'New to HausMaster?';
+
+  @override
+  String get createManagerAccount => 'Create a manager account';
+
+  @override
+  String get languageSwitch => 'Language: English (EN)';
+
+  @override
+  String get languageSwitchHint => 'Switch to French';
+
+  @override
+  String propertiesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count properties',
+      one: '1 property',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String unitsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count units',
+      one: '1 unit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get propertiesHeading => 'Your properties';
+
+  @override
+  String get occupancyRate => 'Occupancy rate';
+
+  @override
+  String get searchProperties => 'Search by name or city…';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterOccupied => 'Occupied';
+
+  @override
+  String get filterVacant => 'Vacant';
+
+  @override
+  String get occupancyLabel => 'Occupancy';
+
+  @override
+  String get viewProperty => 'View';
+
+  @override
+  String get noResultsTitle => 'No results';
+
+  @override
+  String get noResultsBody => 'Try another name or filter.';
 
   @override
   String get registerSubtitle => 'Track rent, tenants and bills in one place.';

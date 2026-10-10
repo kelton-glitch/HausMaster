@@ -78,19 +78,22 @@ void main() {
 
     testWidgets('register screen opens and returns', (tester) async {
       await _pump(tester, _SignedOut.new);
-      await tester.tap(find.text('Créer un compte'));
+      await tester.ensureVisible(find.text('Créer un compte gérant'));
+      await tester.tap(find.text('Créer un compte gérant'));
       await tester.pumpAndSettle();
       expect(find.text('Créer mon compte'), findsOneWidget);
+      await tester.ensureVisible(find.text('J’ai déjà un compte'));
       await tester.tap(find.text('J’ai déjà un compte'));
       await tester.pumpAndSettle();
-      expect(find.text('Bon retour'), findsOneWidget);
+      expect(find.text('Bienvenue'), findsOneWidget);
     });
 
     testWidgets('password rule turns into a check at 8 characters', (
       tester,
     ) async {
       await _pump(tester, _SignedOut.new);
-      await tester.tap(find.text('Créer un compte'));
+      await tester.ensureVisible(find.text('Créer un compte gérant'));
+      await tester.tap(find.text('Créer un compte gérant'));
       await tester.pumpAndSettle();
       expect(find.byIcon(Icons.circle_outlined), findsOneWidget);
       await tester.enterText(find.byType(TextFormField).last, 'longenough1');
@@ -141,9 +144,12 @@ void main() {
       await tester.tap(find.text('Biens'));
       await tester.pumpAndSettle();
       expect(find.text('Aucun bien pour l’instant'), findsOneWidget);
-      await tester.tap(find.text('Loyers'));
+      await tester.tap(find.text('Grand Livre'));
       await tester.pumpAndSettle();
-      expect(find.text('Aucun loyer à suivre'), findsOneWidget);
+      expect(
+        find.text('Le registre des loyers se remplit dès qu’un bail est créé.'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('language can be switched at runtime', (tester) async {
@@ -185,7 +191,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(FilledButton, 'Se déconnecter'));
       await tester.pumpAndSettle();
-      expect(find.text('Bon retour'), findsOneWidget);
+      expect(find.text('Bienvenue'), findsOneWidget);
     });
 
     testWidgets('theme can be switched and is applied', (tester) async {

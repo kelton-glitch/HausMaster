@@ -10,6 +10,7 @@ import '../../../core/widgets/error_banner.dart';
 import '../../../core/widgets/password_field.dart';
 import '../../../l10n/app_localizations.dart';
 import 'auth_controller.dart';
+import 'auth_header.dart';
 import 'validators.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -85,95 +86,119 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(Spacing.lg),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: AutofillGroup(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        l10n.registerSubtitle,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      const SizedBox(height: Spacing.lg),
-                      TextFormField(
-                        controller: _name,
-                        textCapitalization: TextCapitalization.words,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.name],
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onFieldSubmitted: (_) => _emailFocus.requestFocus(),
-                        decoration: InputDecoration(
-                          labelText: l10n.fullName,
-                          prefixIcon: const Icon(Icons.person_outline),
-                        ),
-                        validator: (v) => validateRequired(l10n, v),
-                      ),
-                      const SizedBox(height: Spacing.md),
-                      TextFormField(
-                        controller: _email,
-                        focusNode: _emailFocus,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.newUsername],
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onFieldSubmitted: (_) => _phoneFocus.requestFocus(),
-                        decoration: InputDecoration(
-                          labelText: l10n.email,
-                          prefixIcon: const Icon(Icons.mail_outline),
-                        ),
-                        validator: (v) => validateEmail(l10n, v),
-                      ),
-                      const SizedBox(height: Spacing.md),
-                      TextFormField(
-                        controller: _phone,
-                        focusNode: _phoneFocus,
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.telephoneNumber],
-                        onFieldSubmitted: (_) => _passwordFocus.requestFocus(),
-                        decoration: InputDecoration(
-                          labelText: l10n.phoneOptional,
-                          prefixIcon: const Icon(Icons.phone_outlined),
-                        ),
-                      ),
-                      const SizedBox(height: Spacing.md),
-                      PasswordField(
-                        controller: _password,
-                        focusNode: _passwordFocus,
-                        label: l10n.passwordWithHint,
-                        autofillHints: const [AutofillHints.newPassword],
-                        textInputAction: TextInputAction.done,
-                        onSubmitted: (_) => _submit(),
-                        validator: (v) => validateNewPassword(l10n, v),
-                      ),
-                      const SizedBox(height: Spacing.sm),
-                      _PasswordRule(
-                        controller: _password,
-                        text: l10n.passwordRuleLength,
-                      ),
-                      if (auth.hasError) ...[
-                        const SizedBox(height: Spacing.md),
-                        ErrorBanner(failureText(context, auth.error!)),
-                      ],
-                      const SizedBox(height: Spacing.lg),
-                      AppButton(
-                        label: l10n.createMyAccount,
-                        loading: _loading,
-                        onPressed: _submit,
-                      ),
-                      const SizedBox(height: Spacing.sm),
-                      TextButton(
-                        onPressed: _loading
-                            ? null
-                            : () => Navigator.of(context).pop(),
-                        child: Text(l10n.haveAccount),
-                      ),
-                    ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const AuthBrand(),
+                  const SizedBox(height: Spacing.lg),
+                  Text(
+                    l10n.registerSubtitle,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
-                ),
+                  const SizedBox(height: Spacing.lg),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(Spacing.lg),
+                      child: AutofillGroup(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextFormField(
+                                controller: _name,
+                                textCapitalization: TextCapitalization.words,
+                                textInputAction: TextInputAction.next,
+                                autofillHints: const [AutofillHints.name],
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                onFieldSubmitted: (_) =>
+                                    _emailFocus.requestFocus(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.fullName,
+                                  prefixIcon: const Icon(Icons.person_outline),
+                                ),
+                                validator: (v) => validateRequired(l10n, v),
+                              ),
+                              const SizedBox(height: Spacing.md),
+                              TextFormField(
+                                controller: _email,
+                                focusNode: _emailFocus,
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                autofillHints: const [
+                                  AutofillHints.newUsername,
+                                ],
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                onFieldSubmitted: (_) =>
+                                    _phoneFocus.requestFocus(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.email,
+                                  prefixIcon: const Icon(Icons.mail_outline),
+                                ),
+                                validator: (v) => validateEmail(l10n, v),
+                              ),
+                              const SizedBox(height: Spacing.md),
+                              TextFormField(
+                                controller: _phone,
+                                focusNode: _phoneFocus,
+                                keyboardType: TextInputType.phone,
+                                textInputAction: TextInputAction.next,
+                                autofillHints: const [
+                                  AutofillHints.telephoneNumber,
+                                ],
+                                onFieldSubmitted: (_) =>
+                                    _passwordFocus.requestFocus(),
+                                decoration: InputDecoration(
+                                  labelText: l10n.phoneOptional,
+                                  prefixIcon: const Icon(Icons.phone_outlined),
+                                ),
+                              ),
+                              const SizedBox(height: Spacing.md),
+                              PasswordField(
+                                controller: _password,
+                                focusNode: _passwordFocus,
+                                label: l10n.passwordWithHint,
+                                autofillHints: const [
+                                  AutofillHints.newPassword,
+                                ],
+                                textInputAction: TextInputAction.done,
+                                onSubmitted: (_) => _submit(),
+                                validator: (v) => validateNewPassword(l10n, v),
+                              ),
+                              const SizedBox(height: Spacing.sm),
+                              _PasswordRule(
+                                controller: _password,
+                                text: l10n.passwordRuleLength,
+                              ),
+                              if (auth.hasError) ...[
+                                const SizedBox(height: Spacing.md),
+                                ErrorBanner(failureText(context, auth.error!)),
+                              ],
+                              const SizedBox(height: Spacing.lg),
+                              AppButton(
+                                label: l10n.createMyAccount,
+                                loading: _loading,
+                                onPressed: _submit,
+                              ),
+                              const SizedBox(height: Spacing.sm),
+                              TextButton(
+                                onPressed: _loading
+                                    ? null
+                                    : () => Navigator.of(context).pop(),
+                                child: Text(l10n.haveAccount),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
